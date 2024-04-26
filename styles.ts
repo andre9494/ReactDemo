@@ -1,25 +1,36 @@
-import { StyleSheet } from 'react-native';
+import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 
-const container = {
-  marginVertical: 50,
-  marginHorizontal: 10,
-};
+type Style = ViewStyle | TextStyle | ImageStyle;
 
-const fontColor = "#FFF";
-
-const styles = StyleSheet.create({
-  container: container,
-  appBackground: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: "#223",
+const layouts: { [key: string]: Style } = {
+  container: {
+    marginVertical: 50,
+    marginHorizontal: 10,
   },
   centeredContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: { color: fontColor }
+  square: {
+    height: 50,
+    width: 50,
+    backgroundColor: "#368056",
+    borderRadius: 10
+  }
+}
+
+const fontColor = "#FFF";
+
+const styles = StyleSheet.create({
+  appBackground: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#223",
+  },
+  container: layouts.container,
+  text: { color: fontColor },
+  square: layouts.square
 });
 
 export default styles;
