@@ -9,12 +9,9 @@ import CenteredContainer from "../layouts/CenteredContainer";
 
 const Timer = (props: {targetDate: Moment}) => {
   const { targetDate } = props;
-  
-  //   const currentDate = moment();
   const currentDate: Moment = moment();
-  // const targetDate: Moment = moment("2024-05-31 12:00:00");
   const duration: Duration = moment.duration(targetDate.diff(currentDate));
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number>(0);
   useEffect(() => {
     setTimeout(() => {
       setCount(count + 1);

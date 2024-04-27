@@ -21,6 +21,8 @@ const layouts: { [key: string]: Style } = {
 };
 
 export const COLORS = {
+  transparent: "#0000",
+  white: "#FFF",
   font: "#FFF",
   background: "#223",
   squareGreen: "#368056",
