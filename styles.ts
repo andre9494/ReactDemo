@@ -20,18 +20,23 @@ const layouts: { [key: string]: Style } = {
   },
 };
 
-const fontColor = "#FFF";
+export const COLORS = {
+  font: "#FFF",
+  background: "#223",
+  squareGreen: "#368056",
+};
+// const fontColor = "#FFF";
 
 const styles = StyleSheet.create({
   appBackground: {
     height: "100%",
     width: "100%",
-    backgroundColor: "#223",
+    backgroundColor: COLORS.background,
   },
   centeredContainer: layouts.centeredContainer,
   pageContainer: { ...layouts.container, marginVertical: 50 },
   container: layouts.container,
-  text: { color: fontColor },
+  text: { color: COLORS.font },
   square: layouts.square,
 });
 

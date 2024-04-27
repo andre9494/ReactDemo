@@ -2,21 +2,18 @@ import { View } from "react-native";
 import Square from "../components/Square";
 import TextField from "../components/TextField";
 import styles from "../styles";
-import moment from "moment";
+import moment, { Duration, Moment } from "moment";
 import { useEffect, useState } from "react";
 import IAttribute from "../interfaces/IAttribute";
+import CenteredContainer from "../layouts/CenteredContainer";
 
-const Timer = () => {
+const Timer = (props: {targetDate: Moment}) => {
+  const { targetDate } = props;
+  
   //   const currentDate = moment();
-  const currentDate = moment();
-  const targetDate = moment("2024-05-31 12:00:00");
-  const duration = moment.duration(targetDate.diff(currentDate));
-  //   const years = duration.years();
-  //   const months = duration.months();
-  //   const days = duration.days();
-  //   const hours = duration.hours();
-  //   const minutes = duration.minutes();
-  //   const seconds = duration.seconds();
+  const currentDate: Moment = moment();
+  // const targetDate: Moment = moment("2024-05-31 12:00:00");
+  const duration: Duration = moment.duration(targetDate.diff(currentDate));
   const [count, setCount] = useState(0);
   useEffect(() => {
     setTimeout(() => {
@@ -38,21 +35,22 @@ const Timer = () => {
   ];
 
   return (
-    <View style={{ ...styles.pageContainer, ...styles.centeredContainer }}>
+    <CenteredContainer>
       <TextField>{targetDate.format("DD/MM/yyyy-hh:mm:ss")}</TextField>
-      {squares.map((line: any) => (
+      {squares.map((line: Array<IAttribute>, index: number) => (
         <View
+          key={index}
           style={{ ...styles.container, display: "flex", flexDirection: "row" }}
         >
-          {line.map((time:any) => (
-            <View style={styles.container}>
+          {line.map((time: IAttribute) => (
+            <View key={index + time.label} style={styles.container}>
               <TextField>{time.label}</TextField>
               <Square>{time.value}</Square>
             </View>
           ))}
         </View>
       ))}
-    </View>
+    </CenteredContainer>
   );
 };
 
