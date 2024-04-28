@@ -90,7 +90,7 @@ const Timer = (props: { targetDate: Moment }) => {
 
   return (
     <CenteredContainer>
-      <TextField>{targetDate.format("DD/MM/yyyy-hh:mm:ss")}</TextField>
+      <TextField style={{fontSize:20}}>Time left:</TextField>
       {squares.map((line: Array<IAttribute>, index: number) => (
         <View
           key={index}
@@ -99,7 +99,6 @@ const Timer = (props: { targetDate: Moment }) => {
           {line.map((time: IAttribute) => (
             <View key={index + time.label} style={styles.container}>
               <TextField>{time.label}</TextField>
-              <TextField>{checkIfGone(time) ? "red" : "green"}</TextField>
               <Square color={checkIfGone(time) ? COLORS.squareRed : COLORS.squareGreen}>
                 {time.value}
               </Square>
