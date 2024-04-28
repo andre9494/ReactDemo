@@ -9,7 +9,6 @@ import { useState } from "react";
 import Toast from "react-native-toast-message";
 
 export default function App() {
-
   const [targetDate, setTargetDate] = useState<Moment>();
   // moment("2024-05-31 12:00:00")
   return (

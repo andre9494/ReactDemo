@@ -7,16 +7,16 @@ import { useEffect, useState } from "react";
 import IAttribute from "../interfaces/IAttribute";
 import CenteredContainer from "../layouts/CenteredContainer";
 
-const Timer = (props: {targetDate: Moment}) => {
+const Timer = (props: { targetDate: Moment }) => {
   const { targetDate } = props;
-  const currentDate: Moment = moment();
-  const duration: Duration = moment.duration(targetDate.diff(currentDate));
   const [count, setCount] = useState<number>(0);
   useEffect(() => {
     setTimeout(() => {
       setCount(count + 1);
     }, 100);
   }, [count]);
+  const currentDate: Moment = moment();
+  const duration: Duration = moment.duration(targetDate.diff(currentDate));
 
   const squares: Array<Array<IAttribute>> = [
     [
