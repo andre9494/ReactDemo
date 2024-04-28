@@ -6,9 +6,14 @@ import moment, { Duration, Moment } from "moment";
 import { useEffect, useState } from "react";
 import IAttribute from "../interfaces/IAttribute";
 import CenteredContainer from "../layouts/CenteredContainer";
+import Button from "../components/Button";
+import { saveDate } from "../storage/dateStorage";
 
-const Timer = (props: { targetDate: Moment }) => {
-  const { targetDate } = props;
+const Timer = (props: {
+  targetDate: Moment;
+  setTargetDate: React.Dispatch<React.SetStateAction<Moment | undefined>>;
+}) => {
+  const { targetDate, setTargetDate } = props;
   const [count, setCount] = useState<number>(0);
   useEffect(() => {
     setTimeout(() => {
@@ -71,26 +76,41 @@ const Timer = (props: { targetDate: Moment }) => {
 
   const checkIfGone = (time: IAttribute): boolean => {
     switch (time.label) {
-        case "Seconds":
-            return checkIfGone({ label: "MInutes", value:time.value}) && duration.seconds() == 0;
-        case "Minutes":
-            return checkIfGone({ label: "Hours", value:time.value}) && duration.minutes() == 0;
-        case "Hours":
-            return checkIfGone({ label: "Days", value:time.value }) && duration.hours() == 0;
-        case "Days":
-            return checkIfGone({ label: "Months", value:time.value }) && duration.days() == 0;
-        case "Months":
-            return checkIfGone({ label: "Years", value:time.value }) && duration.months() == 0;
-        case "Years":
-            return duration.years() == 0;
-        default:
-            return false; // Handle invalid cases
+      case "Seconds":
+        return (
+          checkIfGone({ label: "MInutes", value: time.value }) &&
+          duration.seconds() == 0
+        );
+      case "Minutes":
+        return (
+          checkIfGone({ label: "Hours", value: time.value }) &&
+          duration.minutes() == 0
+        );
+      case "Hours":
+        return (
+          checkIfGone({ label: "Days", value: time.value }) &&
+          duration.hours() == 0
+        );
+      case "Days":
+        return (
+          checkIfGone({ label: "Months", value: time.value }) &&
+          duration.days() == 0
+        );
+      case "Months":
+        return (
+          checkIfGone({ label: "Years", value: time.value }) &&
+          duration.months() == 0
+        );
+      case "Years":
+        return duration.years() == 0;
+      default:
+        return false; // Handle invalid cases
     }
-};
+  };
 
   return (
     <CenteredContainer>
-      <TextField style={{fontSize:20}}>Time left:</TextField>
+      <TextField style={{ fontSize: 20 }}>Time left:</TextField>
       {squares.map((line: Array<IAttribute>, index: number) => (
         <View
           key={index}
@@ -99,13 +119,24 @@ const Timer = (props: { targetDate: Moment }) => {
           {line.map((time: IAttribute) => (
             <View key={index + time.label} style={styles.container}>
               <TextField>{time.label}</TextField>
-              <Square color={checkIfGone(time) ? COLORS.squareRed : COLORS.squareGreen}>
+              <Square
+                color={
+                  checkIfGone(time) ? COLORS.squareRed : COLORS.squareGreen
+                }
+              >
                 {time.value}
               </Square>
             </View>
           ))}
         </View>
       ))}
+      <Button
+        text={"Reset Date"}
+        onClick={() => {
+          saveDate("");
+          setTargetDate(undefined);
+        }}
+      />
     </CenteredContainer>
   );
 };

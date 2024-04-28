@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const saveDate = async (value: string) => {
+export const saveDate = async (value: string) => {
   try {
     await AsyncStorage.setItem("targetDate", value);
   } catch (e) {
@@ -8,7 +8,7 @@ const saveDate = async (value: string) => {
   }
 };
 
-const getDate = async () => {
+export const getDate = async () => {
   try {
     const value = await AsyncStorage.getItem("targetDate");
     if (value !== null) {

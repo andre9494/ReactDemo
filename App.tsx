@@ -1,21 +1,29 @@
-// import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import styles from "./styles";
 import Timer from "./pages/Timer";
 import { StatusBar } from "expo-status-bar";
 import Config from "./pages/Config";
 import { Moment } from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
+import { getDate } from "./storage/dateStorage";
+import moment from "moment";
+import CONSTANTS from "./constans";
 
 export default function App() {
   const [targetDate, setTargetDate] = useState<Moment>();
-  // moment("2024-05-31 12:00:00")
+  useEffect(() => {
+    getDate().then((date: string | undefined) => {
+      if (date) {
+        setTargetDate(moment(date, CONSTANTS.DATEPICKER_FORMAT));
+      }
+    });
+  }, []);
   return (
     <View style={styles.appBackground}>
       <StatusBar style="light" />
       {targetDate ? (
-        <Timer targetDate={targetDate} />
+        <Timer targetDate={targetDate} setTargetDate={setTargetDate} />
       ) : (
         <Config setTargetDate={setTargetDate} />
       )}

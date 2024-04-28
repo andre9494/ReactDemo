@@ -9,6 +9,7 @@ import moment from "moment";
 import Toast from "react-native-toast-message";
 import { date1IsMoreRecent } from "../utils/utils";
 import CONSTANTS from "../constans";
+import { saveDate } from "../storage/dateStorage";
 
 const Config = (props: {
   setTargetDate: React.Dispatch<React.SetStateAction<Moment | undefined>>;
@@ -40,7 +41,7 @@ const Config = (props: {
 
   return (
     <CenteredContainer>
-      <TextField style={{fontSize:20}}>Pick a Date</TextField>
+      <TextField style={{ fontSize: 20 }}>Pick a Date</TextField>
       <DatePicker
         onSelectedChange={(date: string) => setSelectedDate(date)}
         options={{
@@ -53,16 +54,6 @@ const Config = (props: {
         }}
         minimumDate={moment().format(CONSTANTS.DATEPICKER_FORMAT)}
       />
-      {/* <TextField>{moment().startOf("day").toString()}</TextField> */}
-      {/* <TextField>
-        {moment(selectedDate, CONSTANTS.DATEPICKER_FORMAT).toString()}
-      </TextField> */}
-      {/* <TextField>{moment().startOf("day").diff(moment(selectedDate, CONSTANTS.DATEPCIKER_FORMAT).toString())}</TextField> */}
-      {/* <TextField>
-        {date1IsMoreRecent(moment(selectedDate, CONSTANTS.DATEPICKER_FORMAT), moment())
-          ? "yes"
-          : "no"}
-      </TextField> */}
       <Button
         text={"That's my date Mate!"}
         onClick={() => {
@@ -75,6 +66,7 @@ const Config = (props: {
               moment(),
             )
           ) {
+            saveDate(selectedDate);
             setTargetDate(moment(selectedDate, CONSTANTS.DATEPICKER_FORMAT));
           }
         }}
