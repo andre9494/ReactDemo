@@ -6,6 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import Config from "./pages/Config";
 import { Moment } from "moment";
 import { useState } from "react";
+import Toast from "react-native-toast-message";
 
 export default function App() {
 
@@ -16,6 +17,7 @@ export default function App() {
       <StatusBar style="light" />
       <Config setTargetDate={setTargetDate} />
       {targetDate && <Timer targetDate={targetDate} />}
+      <Toast />
     </View>
   );
 }
