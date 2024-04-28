@@ -14,8 +14,11 @@ export default function App() {
   return (
     <View style={styles.appBackground}>
       <StatusBar style="light" />
-      <Config setTargetDate={setTargetDate} />
-      {targetDate && <Timer targetDate={targetDate} />}
+      {targetDate ? (
+        <Timer targetDate={targetDate} />
+      ) : (
+        <Config setTargetDate={setTargetDate} />
+      )}
       <Toast />
     </View>
   );

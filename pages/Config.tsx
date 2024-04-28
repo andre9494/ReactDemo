@@ -8,6 +8,7 @@ import { Moment } from "moment";
 import moment from "moment";
 import Toast from "react-native-toast-message";
 import { date1IsMoreRecent } from "../utils/utils";
+import CONSTANTS from "../constans";
 
 const Config = (props: {
   setTargetDate: React.Dispatch<React.SetStateAction<Moment | undefined>>;
@@ -39,6 +40,7 @@ const Config = (props: {
 
   return (
     <CenteredContainer>
+      <TextField style={{fontSize:20}}>Pick a Date</TextField>
       <DatePicker
         onSelectedChange={(date: string) => setSelectedDate(date)}
         options={{
@@ -49,18 +51,18 @@ const Config = (props: {
           mainColor: COLORS.squareGreen,
           textSecondaryColor: COLORS.squareGreen,
         }}
-        minimumDate={moment().format("yyyy/MM/DD hh:mm")}
+        minimumDate={moment().format(CONSTANTS.DATEPICKER_FORMAT)}
       />
-      <TextField>{moment().startOf("day").toString()}</TextField>
-      <TextField>
-        {moment(selectedDate, "yyyy/MM/DD hh:mm").toString()}
-      </TextField>
-      {/* <TextField>{moment().startOf("day").diff(moment(selectedDate, "yyyy/MM/DD hh:mm").toString())}</TextField> */}
-      <TextField>
-        {date1IsMoreRecent(moment(selectedDate, "yyyy/MM/DD hh:mm"), moment())
+      {/* <TextField>{moment().startOf("day").toString()}</TextField> */}
+      {/* <TextField>
+        {moment(selectedDate, CONSTANTS.DATEPICKER_FORMAT).toString()}
+      </TextField> */}
+      {/* <TextField>{moment().startOf("day").diff(moment(selectedDate, CONSTANTS.DATEPCIKER_FORMAT).toString())}</TextField> */}
+      {/* <TextField>
+        {date1IsMoreRecent(moment(selectedDate, CONSTANTS.DATEPICKER_FORMAT), moment())
           ? "yes"
           : "no"}
-      </TextField>
+      </TextField> */}
       <Button
         text={"That's my date Mate!"}
         onClick={() => {
@@ -69,11 +71,11 @@ const Config = (props: {
           }
           if (
             date1IsMoreRecent(
-              moment(selectedDate, "yyyy/MM/DD hh:mm"),
+              moment(selectedDate, CONSTANTS.DATEPICKER_FORMAT),
               moment(),
             )
           ) {
-            // setTargetDate(moment(selectedDate, "yyyy/MM/DD hh:mm"));
+            setTargetDate(moment(selectedDate, CONSTANTS.DATEPICKER_FORMAT));
           }
         }}
       />

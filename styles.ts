@@ -15,7 +15,6 @@ const layouts: { [key: string]: Style } = {
   square: {
     height: 50,
     width: 50,
-    backgroundColor: "#368056",
     borderRadius: 10,
   },
 };
@@ -26,6 +25,7 @@ export const COLORS = {
   font: "#FFF",
   background: "#223",
   squareGreen: "#368056",
+  squareRed: "#c74444",
 };
 // const fontColor = "#FFF";
 
