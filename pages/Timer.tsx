@@ -36,44 +36,6 @@ const Timer = (props: {
     ],
   ];
 
-  // const checkIfGone = (time: IAttribute) => {
-  //   if (time.label == "Seconds") {
-  //     return duration.seconds() == 0;
-  //   } else if (time.label == "Minutes") {
-  //     return duration.minutes() == 0 && duration.seconds() == 0;
-  //   } else if (time.label == "Hours") {
-  //     return (
-  //       duration.hours() == 0 &&
-  //       duration.minutes() == 0 &&
-  //       duration.seconds() == 0
-  //     );
-  //   } else if (time.label == "Days") {
-  //     return (
-  //       duration.days() == 0 &&
-  //       duration.hours() == 0 &&
-  //       duration.minutes() == 0 &&
-  //       duration.seconds() == 0
-  //     );
-  //   } else if (time.label == "Months") {
-  //     return (
-  //       duration.months() == 0 &&
-  //       duration.days() == 0 &&
-  //       duration.hours() == 0 &&
-  //       duration.minutes() == 0 &&
-  //       duration.seconds() == 0
-  //     );
-  //   } else if (time.label == "Years") {
-  //     return (
-  //       duration.years() == 0 &&
-  //       duration.months() == 0 &&
-  //       duration.days() == 0 &&
-  //       duration.hours() == 0 &&
-  //       duration.minutes() == 0 &&
-  //       duration.seconds() == 0
-  //     );
-  //   }
-  // };
-
   const checkIfGone = (time: IAttribute): boolean => {
     switch (time.label) {
       case "Seconds":
