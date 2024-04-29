@@ -11,14 +11,15 @@ import { date1IsMoreRecent } from "../utils/utils";
 import CONSTANTS from "../constans";
 import { saveDate } from "../storage/dateStorage";
 import { View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import { ImagePickerAsset, MediaTypeOptions, launchImageLibraryAsync } from "expo-image-picker";
+// import  from "expo-image-picker";
 
 const Config = (props: {
   setTargetDate: React.Dispatch<React.SetStateAction<Moment | undefined>>;
 }) => {
   const { setTargetDate } = props;
   const [selectedDate, setSelectedDate] = useState<string>("");
-  const [imageUrl, setImageURL] = useState<string>();
+  const [images, setImages] = useState<Array<ImagePickerAsset>>();
   const showToast = () => {
     Toast.show({
       type: "info",
@@ -58,19 +59,20 @@ const Config = (props: {
 
   const pickImage = async () => {
     //   // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+    let result = await launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.All,
       // allowsEditing: true,
       // aspect: [4, 3],
+      base64:true,
       quality: 1,
       allowsMultipleSelection: true,
     });
 
-    //   console.log(result);
+      console.log(result);
 
-    //   if (!result.canceled) {
-    //     setImageURL(result.assets[0].uri);
-    //   }
+      if (!result.canceled) {
+        setImages(result.assets);
+      }
   };
 
   return (
@@ -90,6 +92,7 @@ const Config = (props: {
       />
       <Button text={"That's my date Mate!"} onClick={onClick} />
       <View style={styles.container}>
+        {images && images.map((image: ImagePickerAsset, index) => <TextField key={index}>{image.fileName || "file"}</TextField>)}
         <Button text={"try me"} onClick={pickImage} />
       </View>
     </CenteredContainer>
